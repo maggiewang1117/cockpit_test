@@ -1,0 +1,4 @@
+2016-05-05 19:36:25,255 - test_login.py - INFO - Inital Firefox as the testing webdriver!
+2016-05-05 19:36:27,725 - test_login.py - ERROR - Login page shows 'Server: tee.local'
+2016-05-05 19:36:27,725 - test_login.py - ERROR - Hostname in host is 'tee.local
+'
