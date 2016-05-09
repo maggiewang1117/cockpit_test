@@ -102,4 +102,4 @@ class TestLogin(object):
 
 if __name__ == "__main__":
     login = TestLogin()
-    login.run()
+    run_res = login.run()
