@@ -1,6 +1,14 @@
-import sys
-sys.path.append("/home/huiwa/avocado_learn/avocado_cockpit/cockpit_test")
 import re
+import sys
+import os
+import time
+
+f = re.compile(".*/cockpit_test")
+print os.path.abspath(os.path.dirname(__file__))
+sys.path.append(f.findall(os.path.abspath(os.path.abspath(os.path.dirname(__file__))))[0])
+
+print os.path.abspath(os.path.abspath(os.path.dirname(__file__)))
+print sys.path
 from confs import comm
 from libs import general
 from selenium.webdriver import Firefox
@@ -41,17 +49,18 @@ class TestLogin(object):
         return result
 
     def check_login_status(self, web_driver):
-    	web_driver = web_driver
-    	web_driver.implicitly_wait(10)
-    	current_user = web_driver.find_element_by_id("content-user-name").text
+        web_driver = web_driver
+        web_driver.implicitly_wait(10)
+        time.sleep(1)
+        current_user = web_driver.find_element_by_id("content-user-name").text
 
-    	if current_user.strip() == self.username:
-    		self.logger.info("Login with '%s' succeed!" % self.username)
-    		self.result += 0
-    	else:
-    		self.logger.error("Login with '%s' failed!" % self.username)
-    		self.result += 1
-    	return self.result
+        if current_user.strip() == self.username:
+            self.logger.info("Login with '%s' succeed!" % self.username)
+            self.result += 0
+        else:
+            self.logger.error("Login with '%s' failed!" % self.username)
+            self.result += 1
+        return self.result
 
     def get_all_infos_in_server(self):
         stdin, stdout, stderr = self.ssh_conn.exec_command("hostname")
@@ -75,25 +84,25 @@ class TestLogin(object):
         return self.result
 
     def check_version_in_login_page(self, web_driver, verion_name):
-    	web_driver = web_driver
-    	version_in_login = str(web_driver.find_element_by_id("brand").text)
-    	verion_name = verion_name.upper()
-    	f = re.compile(verion_name)
+        web_driver = web_driver
+        version_in_login = str(web_driver.find_element_by_id("brand").text)
+        verion_name = verion_name.upper()
+        f = re.compile(verion_name)
 
-    	if f.findall(version_in_login):
-    		self.logger.info("Login Page shows '%s'" % version_in_login)
-    		self.logger.info("Version should be '%s'" % verion_name)
-    		self.result += 0
-    	else:
-    		self.logger.error("Login Page shows '%s'" % version_in_login)
-    		self.logger.error("Version should be '%s'" % verion_name)
-    		self.result += 1
-    	return self.result
-
+        if f.findall(version_in_login):
+            self.logger.info("Login Page shows '%s'" % version_in_login)
+            self.logger.info("Version should be '%s'" % verion_name)
+            self.result += 0
+        else:
+            self.logger.error("Login Page shows '%s'" % version_in_login)
+            self.logger.error("Version should be '%s'" % verion_name)
+            self.result += 1
+        return self.result
 
     def run(self):
         f_driver = self.init_webdirver()
-        total_result = self.check_version_in_login_page(f_driver, self.rhevh_version)
+        total_result = self.check_version_in_login_page(
+            f_driver, self.rhevh_version)
         total_result += self.check_server_name_in_login_page(f_driver)
         total_result += self.login(f_driver)
         f_driver.close()
