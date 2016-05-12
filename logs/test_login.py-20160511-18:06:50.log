@@ -1,0 +1,6 @@
+2016-05-11 18:06:50,346 - test_login.py - INFO - Inital Firefox as the testing webdriver!
+2016-05-11 18:06:52,768 - test_login.py - INFO - Login Page shows 'RED HAT ENTERPRISE VIRTUALIZATION HYPERVISOR 3.6'
+2016-05-11 18:06:52,768 - test_login.py - INFO - Version should be 'RED HAT ENTERPRISE VIRTUALIZATION HYPERVISOR 3.6'
+2016-05-11 18:06:52,812 - test_login.py - INFO - Login page shows 'Server: dhcp-10-187.nay.redhat.com'
+2016-05-11 18:06:52,812 - test_login.py - INFO - Hostname in host is 'dhcp-10-187.nay.redhat.com'
+2016-05-11 18:06:54,411 - test_login.py - INFO - Login with 'root' succeed!
